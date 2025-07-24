@@ -3,6 +3,10 @@
 ## Part 1
 1. Be sure to upload your Python script. Provide a link to it here:
 
+[Base-nt-distribution](/python_scripts/base-nt-distribution.py)
+
+[Base-nt-distribution-SLURM](/slurm_scripts/base-nt-plot-slurm.sh)
+
 | File name | label | Read length | Phred encoding |
 |---|---|---|---|
 | 1294_S1_L008_R1_001.fastq.gz | Forward Read | 101 | Phred-33 |
