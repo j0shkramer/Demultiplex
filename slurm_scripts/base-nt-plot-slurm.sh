@@ -17,3 +17,9 @@ cd ../python_scripts
 
 /usr/bin/time -v gzcat "$fastqR1" | ./base-nt-distribution.py -f - -r 101
 
+# /usr/bin/time -v gzcat "$fastqR2" | ./base-nt-distribution.py -f - -r 8
+
+# /usr/bin/time -v gzcat "$fastqR3" | ./base-nt-distribution.py -f - -r 8
+
+# /usr/bin/time -v gzcat "$fastqR4" | ./base-nt-distribution.py -f - -r 101
+

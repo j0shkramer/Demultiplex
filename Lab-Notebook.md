@@ -143,3 +143,4 @@ Dual-Indexing Workflows
     reverse complement of the Index 2 (i5) index adapter sequence.
 
 If the average quality score of the one of the indexes fall below the selected threshold, place it into the unknown file
+
