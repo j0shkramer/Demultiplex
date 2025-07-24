@@ -127,3 +127,19 @@ p -v "^-" | grep -v "^+" | grep "<" | head
     #AA-AFFJJJJJJJJFJAJ7FJFFJJAJJF<FFFJJFFFJJJFA-AFJJJFJJJJJJJFJJFJJ<FAJJJJJJJJ<JFF-FJAAFFFJ<AJ-FFAJ-FFF-
 
     Phred-66 encoding would not have "<"
+
+
+https://support.illumina.com/content/dam/illumina-support/documents/documentation/system_documentation/miseq/indexed-sequencing-overview-guide-15057455-08.pdf 
+
+Dual-Indexing Workflows
+
+    The control software performs Read 1, any index reads, and then Read 2 based on the parameters
+    provided for the run in the sample sheet or during run setup.
+    For all indexing workflows, the Index 1Read directly follows Read 1. However, for dual-indexing on a
+    paired-end flow cell, the rest of the workflow differs:
+    • Forward strand—The Index 2 Read occurs before Read 2 resynthesis, so the Index 2 (i5) adapter is
+    sequenced on the forward strand.
+    • Reverse complement—The Index 2 Read occurs after Read 2 resynthesis, which creates the
+    reverse complement of the Index 2 (i5) index adapter sequence.
+
+If the average quality score of the one of the indexes fall below the selected threshold, place it into the unknown file

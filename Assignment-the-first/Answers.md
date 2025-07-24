@@ -25,3 +25,5 @@
     2. Function headers (name and parameters)
     3. Test examples for individual functions
     4. Return statement
+
+[Psuedocode](/psuedocode.md)
