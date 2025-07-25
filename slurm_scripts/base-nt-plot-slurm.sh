@@ -15,11 +15,26 @@ fastqR4="/projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz"
 
 cd ../python_scripts
 
-/usr/bin/time -v gzcat "$fastqR1" | ./base-nt-distribution.py -f - -r 101
+# zcat "$fastqR1" > R1.fastq
 
-# /usr/bin/time -v gzcat "$fastqR2" | ./base-nt-distribution.py -f - -r 8
+# /usr/bin/time -v ./base-nt-distribution.py -f R1.fastq -k 101
 
-# /usr/bin/time -v gzcat "$fastqR3" | ./base-nt-distribution.py -f - -r 8
+# rm R1.fastq
 
-# /usr/bin/time -v gzcat "$fastqR4" | ./base-nt-distribution.py -f - -r 101
+# zcat "$fastqR2" > R2.fastq
 
+# /usr/bin/time -v ./base-nt-distribution.py -f R2.fastq -k 8
+
+# rm R2.fastq
+
+# zcat "$fastqR3" > R3.fastq
+
+# /usr/bin/time -v ./base-nt-distribution.py -f R3.fastq -k 8
+
+# rm R3.fastq
+
+zcat "$fastqR4" > R4.fastq
+
+/usr/bin/time -v ./base-nt-distribution.py -f R4.fastq -k 101
+
+rm R4.fastq

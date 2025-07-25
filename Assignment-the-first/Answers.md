@@ -16,6 +16,15 @@
 
 2. Per-base NT distribution
     1. Use markdown to insert your 4 histograms here.
+
+![graph1](/plots/R1.fastq.png)
+
+![graph2](/plots/R2.fastq.png)
+
+![graph3](/plots/R3.fastq.png)
+
+![graph4](/plots/R4.fastq.png)
+
     2. **YOUR ANSWER HERE**
     3. **YOUR ANSWER HERE**
     

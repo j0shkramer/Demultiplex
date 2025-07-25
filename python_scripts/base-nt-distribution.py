@@ -39,10 +39,11 @@ for idx in range(0, args.read_size):
     qc_score_per_pos_avg[idx] = qc_score_per_pos_total[idx] / total_records
 
 # plot
-plt.plot(range(args.read_size), qc_score_per_pos_avg)
+plt.bar(range(args.read_size), qc_score_per_pos_avg, color='skyblue', edgecolor='black')
+plt.xlim(0,args.read_size - 1)
 plt.xlabel("Base Position (0 indexed)")
 plt.ylabel("Average Quality Score")
-plt.title(f'Average Quality Score Per Base Position in {args.file}')
-plt.grid(True)
+plt.title(f'Avg Quality Score Per Base Position in {args.file}')
+plt.grid(axis='y', linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.savefig(f'{args.file}.png')

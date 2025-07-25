@@ -144,3 +144,39 @@ Dual-Indexing Workflows
 
 If the average quality score of the one of the indexes fall below the selected threshold, place it into the unknown file
 
+### Generate a per position distribution of quality scores per FASTQ file
+
+Job ID: 36455367
+
+    zcat "$fastqR1" > R1.fastq
+
+    /usr/bin/time -v ./base-nt-distribution.py -f R1.fastq -k 101
+
+    rm R1.fastq
+
+Job ID: 36455368
+
+    zcat "$fastqR2" > R2.fastq
+
+    /usr/bin/time -v ./base-nt-distribution.py -f R2.fastq -k 8
+
+    rm R2.fastq
+
+Job ID: 36455369
+
+    zcat "$fastqR3" > R3.fastq
+
+    /usr/bin/time -v ./base-nt-distribution.py -f R3.fastq -k 8
+
+    rm R3.fastq
+
+Job ID: 36455370
+
+    zcat "$fastqR4" > R4.fastq
+
+    /usr/bin/time -v ./base-nt-distribution.py -f R4.fastq -k 101
+
+    rm temp_R4.fastq
+
+
+
