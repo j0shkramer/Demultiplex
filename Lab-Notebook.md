@@ -154,6 +154,14 @@ Job ID: 36455367
 
     rm R1.fastq
 
+    Command being timed: "./base-nt-distribution.py -f R1.fastq -k 101"
+	User time (seconds): 10034.63
+	System time (seconds): 49.96
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:48:31
+	Maximum resident set size (kbytes): 66828
+	Exit status: 0
+
 Job ID: 36455368
 
     zcat "$fastqR2" > R2.fastq
@@ -161,6 +169,15 @@ Job ID: 36455368
     /usr/bin/time -v ./base-nt-distribution.py -f R2.fastq -k 8
 
     rm R2.fastq
+
+    Command being timed: "./base-nt-distribution.py -f R2.fastq -k 8"
+	User time (seconds): 1038.67
+	System time (seconds): 15.68
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 17:38.08
+	Maximum resident set size (kbytes): 69568
+	Page size (bytes): 4096
+	Exit status: 0
 
 Job ID: 36455369
 
@@ -170,6 +187,14 @@ Job ID: 36455369
 
     rm R3.fastq
 
+    Command being timed: "./base-nt-distribution.py -f R3.fastq -k 8"
+	User time (seconds): 1027.07
+	System time (seconds): 22.54
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 17:33.04
+	Maximum resident set size (kbytes): 67528
+	Exit status: 0
+
 Job ID: 36455370
 
     zcat "$fastqR4" > R4.fastq
@@ -177,6 +202,15 @@ Job ID: 36455370
     /usr/bin/time -v ./base-nt-distribution.py -f R4.fastq -k 101
 
     rm temp_R4.fastq
+
+    Command being timed: "./base-nt-distribution.py -f R4.fastq -k 101"
+	User time (seconds): 10206.63
+	System time (seconds): 77.93
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:52:01
+	Maximum resident set size (kbytes): 66680
+	Exit status: 0
+
 
 
 
