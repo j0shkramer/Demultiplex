@@ -211,6 +211,16 @@ Job ID: 36455370
 	Maximum resident set size (kbytes): 66680
 	Exit status: 0
 
+# July 25th, 2025
 
+### How many indexes have undetermined (N) base calls? 
 
+zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz | grep "^@" -A 1 | grep -v "^@" | grep "N" | 
+wc -l
 
+    3976613 indexes
+
+zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz | grep "^@" -A 1 | grep -v "^@" | grep "N" | 
+wc -l
+
+    3328051 indexes

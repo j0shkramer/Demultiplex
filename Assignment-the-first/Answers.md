@@ -26,7 +26,15 @@
 ![graph4](/plots/R4.fastq.png)
 
     2. **YOUR ANSWER HERE**
-    3. **YOUR ANSWER HERE**
+    3. 7304664 indexes have at least one undetermined (N) base call
+
+        zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz | grep "^@" -A 1 | grep -v "^@" | grep "N" | wc -l
+
+        3976613
+
+        zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz | grep "^@" -A 1 | grep -v "^@" | grep "N" | wc -l
+
+        3328051
     
 ## Part 2
 1. Define the problem
