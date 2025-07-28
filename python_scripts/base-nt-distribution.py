@@ -3,6 +3,7 @@
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
+import gzip
 
 def get_args():
     parser = argparse.ArgumentParser(description="A program to analyze the quality scores of a FASTQ file at each position")
@@ -20,7 +21,7 @@ qc_score_per_pos_total = np.zeros(args.read_size, dtype=float) # np array to hol
 qc_score_per_pos_avg = np.zeros(args.read_size, dtype=float) # np array to hold the avg quality score of every base at that position
 
 # take the FQ file, iterate over each quality score line, summate each converted value of each quality score at each position
-with open(args.file, "r") as fq:
+with gzip.open(args.file, "rt") as fq:
     num_lines: int = 0
     for line in fq:
         num_lines += 1
