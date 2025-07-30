@@ -1,0 +1,10 @@
+Total Records: 10
+Matched Indexes: 6, 60.0% of records
+Mismatched Indexes: 2, 20.0% of records
+Unknown Indexes or Indexes Below Quality Score Threshold: 2, 20.0% of records
+
+Individual Index Matching and Swapping Statistics
+ATA: 4 matches, 40.0% of records
+GCC: 2 matches, 20.0% of records
+ATA to GCC: 1 swap, 10.0% of records
+GCC to ATA: 1 swap, 10.0% of records

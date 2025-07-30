@@ -20,35 +20,35 @@ matched_indexes = 0
 index_match_ct: dict[str, int] = {}
 
 # Barcodes from data
-# barcode_dict = {
-#     "GTAGCGTA": True,
-#     "CGATCGAT": True,
-#     "GATCAAGG": True,
-#     "AACAGCGA": True,
-#     "TAGCCATG": True,
-#     "CGGTAATC": True,
-#     "CTCTGGAT": True,
-#     "TACCGGAT": True,
-#     "CTAGCTCA": True,
-#     "CACTTCAC": True,
-#     "GCTACTCT": True,
-#     "ACGATCAG": True,
-#     "TATGGCAC": True,
-#     "TGTTCCGT": True,
-#     "GTCCTAAG": True,
-#     "TCGACAAG": True,
-#     "TCTTCGAC": True,
-#     "ATCATGCG": True,
-#     "ATCGTGGT": True,
-#     "TCGAGAGT": True,
-#     "TCGGATTC": True,
-#     "GATCTTGC": True,
-#     "AGAGTCCA": True,
-#     "AGGATAGC": True
-# }
+barcode_dict = {
+    "GTAGCGTA": True,
+    "CGATCGAT": True,
+    "GATCAAGG": True,
+    "AACAGCGA": True,
+    "TAGCCATG": True,
+    "CGGTAATC": True,
+    "CTCTGGAT": True,
+    "TACCGGAT": True,
+    "CTAGCTCA": True,
+    "CACTTCAC": True,
+    "GCTACTCT": True,
+    "ACGATCAG": True,
+    "TATGGCAC": True,
+    "TGTTCCGT": True,
+    "GTCCTAAG": True,
+    "TCGACAAG": True,
+    "TCTTCGAC": True,
+    "ATCATGCG": True,
+    "ATCGTGGT": True,
+    "TCGAGAGT": True,
+    "TCGGATTC": True,
+    "GATCTTGC": True,
+    "AGAGTCCA": True,
+    "AGGATAGC": True
+}
 
 # barcodes for test files
-barcode_dict = {"ATA": True, "GCC": True}
+# barcode_dict = {"ATA": True, "GCC": True}
 
 # Take the barcode, and get the list of R1 and R2 files it corresponds to
 barcode_file_dict = {}
@@ -63,7 +63,7 @@ def qual_score(qc_scores: str) -> float:
     # Average phred score of the entire string
     score_sum = 0
     for char in qc_scores:
-        score_sum += convert_phred(char)
+        score_sum += (ord(char) - 33)
     return score_sum / len(qc_scores)
 
 def DNA_reverse_complement(DNA_seq: str) -> str:
@@ -107,7 +107,7 @@ def swap_or_match(barcode: str, count: int) -> str:
 
 
 # Create the output files
-for barcode in barcode_dict.keys():
+for barcode in barcode_dict:
     R1_file = open(f'{barcode}_R1.fastq', "w")
     R2_file = open(f'{barcode}_R2.fastq', "w")
     barcode_file_dict[barcode] = (R1_file, R2_file)
@@ -116,8 +116,8 @@ barcode_file_dict["unknown"] = (open("unknown_R1.fastq", "w"), open("unknown_R2.
 barcode_file_dict["hopped"] = (open("hopped_R1.fastq", "w"), open("hopped_R2.fastq", "w"))
 
 # Parse through the input files and send the FASTQ records to the correct output file
-# with gzip.open(args.read1file, "r") as fq1, gzip.open(args.read2file, "r") as fq2, gzip.open(args.read3file, "r") as fq3, gzip.open(args.read4file, "r") as fq4:
-with open(args.read1file, "r") as fq1, open(args.read2file, "r") as fq2, open(args.read3file, "r") as fq3, open(args.read4file, "r") as fq4: # test files are not gzip'ed
+with gzip.open(args.read1file, "rt") as fq1, gzip.open(args.read2file, "rt") as fq2, gzip.open(args.read3file, "rt") as fq3, gzip.open(args.read4file, "rt") as fq4:
+# with open(args.read1file, "r") as fq1, open(args.read2file, "r") as fq2, open(args.read3file, "r") as fq3, open(args.read4file, "r") as fq4: # test files are not gzip'ed
     num_line: int = 0
     curr_fq1_record = []
     curr_fq2_record = []
@@ -149,7 +149,7 @@ with open(args.read1file, "r") as fq1, open(args.read2file, "r") as fq2, open(ar
             r3_avg_qc = qual_score(r3_qc)
             append_to_header = f'{r2_seq}-{r3_seq_rv_com}'
             # unknown indexes or one of the average quality scores of the index is below the set threshold
-            if r2_seq not in barcode_dict.keys() or r3_seq_rv_com not in barcode_dict.keys() or r2_avg_qc < args.threshold or r3_avg_qc < args.threshold:
+            if r2_seq not in barcode_dict or r3_seq_rv_com not in barcode_dict or r2_avg_qc < args.threshold or r3_avg_qc < args.threshold:
                 unknown_indexes += 1
                 R1_file, R2_file = barcode_file_dict["unknown"]
                 write_to_file(R1_file, append_to_header, r1_header, r1_seq, r1_plus, r1_qc)
@@ -157,7 +157,7 @@ with open(args.read1file, "r") as fq1, open(args.read2file, "r") as fq2, open(ar
             # known indexes that are mismatched
             elif r2_seq != r3_seq_rv_com:
                 mismatched_indexes += 1
-                if append_to_header in index_match_ct.keys():
+                if append_to_header in index_match_ct:
                     index_match_ct[append_to_header] += 1
                 else:
                     index_match_ct[append_to_header] = 1
@@ -168,7 +168,7 @@ with open(args.read1file, "r") as fq1, open(args.read2file, "r") as fq2, open(ar
             elif r2_seq == r3_seq_rv_com:
                 R1_file, R2_file = barcode_file_dict[r2_seq]
                 matched_indexes += 1
-                if append_to_header in index_match_ct.keys():
+                if append_to_header in index_match_ct:
                     index_match_ct[append_to_header] += 1
                 else:
                     index_match_ct[append_to_header] = 1
@@ -179,23 +179,15 @@ with open(args.read1file, "r") as fq1, open(args.read2file, "r") as fq2, open(ar
             curr_fq3_record.clear()
             curr_fq4_record.clear()
 
-
 # Close the output files
-
-for barcode in barcode_file_dict.keys():
+for barcode in barcode_file_dict:
     r1, r2 = barcode_file_dict[barcode]
     r1.close()
     r2.close()
 
-
-print(f'Matched Index Count: {matched_indexes}')
-print(f'Mismatched Index Count: {mismatched_indexes}')
-print(f'Unknown Index Count: {unknown_indexes}')
-
-print(index_match_ct)
-
 num_records = int(num_line / 4)
 
+# Create a text file that stores the statistics of the index matches and swaps
 with open("statistics.txt", "w") as stats:
     percent_matched: float = (matched_indexes / num_records) * 100
     percent_mismatched: float = (mismatched_indexes / num_records) * 100
@@ -203,9 +195,10 @@ with open("statistics.txt", "w") as stats:
     stats.write(f'Total Records: {num_records}\n')
     stats.write(f'Matched Indexes: {matched_indexes}, {percent_matched}% of records\n')
     stats.write(f'Mismatched Indexes: {mismatched_indexes}, {percent_mismatched}% of records\n')
-    stats.write(f'Unknown Indexes: {unknown_indexes}, {percent_unknown}% of records\n\n')
+    stats.write(f'Unknown Indexes or Indexes Below Quality Score Threshold: {unknown_indexes}, {percent_unknown}% of records\n\n')
     stats.write(f'Individual Index Matching and Swapping Statistics\n')
     for barcode, count in sorted(index_match_ct.items(), key=lambda item: item[1], reverse=True):
         match_or_swap = swap_or_match(barcode, count)
-        stats.write(f'{match_or_swap}\n')
+        percent_of_records: float = (count / num_records) * 100
+        stats.write(f'{match_or_swap}, {percent_of_records}% of records\n')
         

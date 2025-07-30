@@ -1,5 +1,7 @@
 #  July 24th, 2025
 
+We are taking mRNA-seq data generated from the 2017 cohort and finding statistics relating to index matches, index swaps, and unknown indexes 
+
 ### 24 indexed (dual matched) libraries for sequencing. The indexes are:
 
     -B1	GTAGCGTA    
@@ -230,3 +232,17 @@ wc -l
 ### Writing demultiplex.py
 
 It is more efficent to open all the files intialially before writing to them, and then closing them at the end
+
+Job ID: 36712619
+
+    /usr/bin/time -v ./demultiplex.py -r1 $fastqR1 -r2 $fastqR2 -r3 $fastqR3 -r4 $fastqR4 -t 30
+
+    Command being timed: "./demultiplex.py -r1 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz -r2 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz -r3 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz -r4 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz -t 30"
+	User time (seconds): 3396.19
+	System time (seconds): 27.97
+	Percent of CPU this job got: 92%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:01:49
+	Maximum resident set size (kbytes): 247712
+	Exit status: 0
+
+    
