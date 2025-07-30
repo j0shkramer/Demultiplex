@@ -1,0 +1,10 @@
+Total Records: 10
+Matched Indexes: 6, 60.0% of records
+Mismatched Indexes: 2, 20.0% of records
+Unknown Indexes: 2, 20.0% of records
+
+Individual Index Matching and Swapping Statistics
+ATA: 4 matches
+GCC: 2 matches
+ATA to GCC: 1 swap
+GCC to ATA: 1 swap
