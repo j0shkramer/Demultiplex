@@ -15,6 +15,8 @@ fastqR4="/projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz"
 
 cd ../python_scripts
 
+# zcat and rm is no longer needed becuse changed python script to gzip.open()
+
 # zcat "$fastqR1" > R1.fastq
 
 # /usr/bin/time -v ./base-nt-distribution.py -f R1.fastq -k 101

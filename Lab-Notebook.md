@@ -224,3 +224,9 @@ zcat /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz | grep "
 wc -l
 
     3328051 indexes
+
+# July 30th, 2025
+
+### Writing demultiplex.py
+
+It is more efficent to open all the files intialially before writing to them, and then closing them at the end
