@@ -15,4 +15,4 @@ fastqR4="/projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz"
 
 cd ../python_scripts
 
-/usr/bin/time -v ./demultiplex.py -r1 $fastqR1 -r2 $fastqR2 -r3 $fastqR3 -r4 $fastqR4 -t 30
+/usr/bin/time -v ./demultiplex.py -r1 $fastqR1 -r2 $fastqR2 -r3 $fastqR3 -r4 $fastqR4 -t 5

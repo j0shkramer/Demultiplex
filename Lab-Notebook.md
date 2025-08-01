@@ -245,4 +245,29 @@ Job ID: 36712619
 	Maximum resident set size (kbytes): 247712
 	Exit status: 0
 
-    
+# July 31th, 2025   
+
+Testing if setting the threshold lower effects the output, the odds that two indexes both swap to be a different barcode is very low because of their differences
+
+JobID: 36732830
+
+    /usr/bin/time -v ./demultiplex.py -r1 $fastqR1 -r2 $fastqR2 -r3 $fastqR3 -r4 $fastqR4 -t 5
+
+    User time (seconds): 3445.59
+	System time (seconds): 44.31
+	Percent of CPU this job got: 94%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:01:41
+	Maximum resident set size (kbytes): 248404
+	Exit status: 0
+
+Threshold 35:
+Total Records: 363246735
+Matched Indexes: 331755033, 91.33049275721639% of records
+Mismatched Indexes: 707740, 0.19483726398807136% of records
+Unknown Indexes or Indexes Below Quality Score Threshold: 30783962, 8.474669978795541% of records
+
+Threshold 5: 
+Total Records: 363246735
+Matched Indexes: 331755033, 91.33049275721639% of records
+Mismatched Indexes: 707740, 0.19483726398807136% of records
+Unknown Indexes or Indexes Below Quality Score Threshold: 30783962, 8.474669978795541% of records

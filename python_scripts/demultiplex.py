@@ -103,7 +103,7 @@ def swap_or_match(barcode: str, count: int) -> str:
     elif barcode[0:middle_idx] != barcode[middle_idx + 1:] and count == 1:
         return f'{first_barcode} to {second_barcode}: {count} swap'
     else:
-        return f'{first_barcode} to {second_barcode}" {count} swaps'
+        return f'{first_barcode} to {second_barcode} {count} swaps'
 
 
 # Create the output files
