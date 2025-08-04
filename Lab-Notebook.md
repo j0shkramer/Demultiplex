@@ -260,14 +260,23 @@ JobID: 36732830
 	Maximum resident set size (kbytes): 248404
 	Exit status: 0
 
-Threshold 35:
+QC Threshold 30:
+Total Records: 363246735
+Matched Indexes: 304980270, 83.95953510772782% of records
+Mismatched Indexes: 517612, 0.1424959814160477% of records
+Unknown Indexes or Indexes Below Quality Score Threshold: 57748853, 15.897968910856141% of records
+
+QC Threshold 5: 
 Total Records: 363246735
 Matched Indexes: 331755033, 91.33049275721639% of records
 Mismatched Indexes: 707740, 0.19483726398807136% of records
 Unknown Indexes or Indexes Below Quality Score Threshold: 30783962, 8.474669978795541% of records
 
-Threshold 5: 
-Total Records: 363246735
-Matched Indexes: 331755033, 91.33049275721639% of records
-Mismatched Indexes: 707740, 0.19483726398807136% of records
-Unknown Indexes or Indexes Below Quality Score Threshold: 30783962, 8.474669978795541% of records
+This makes me think that setting a high threshold does not matter. The number of mismatched indexes increased, but the number of matches increased by much more
+The odds that two indexes both swapped into another known index is low because all of the indexes are different by at least 3 bases. 
+
+# August 3rd, 2025
+
+Editted demultiplex.py to include graphs, one showing the amount of indexes that swapped and what they swapped to, and the one showing the amount of index matches found.
+
+Changed the output statistics.txt to round the thousands place for percentages
