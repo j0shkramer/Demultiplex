@@ -1,0 +1,8 @@
+# Final Index Matching and Mismatching Statistics Summary
+
+
+For the minimum quality score threshold, I decided to select a quality score of 5. This is because the odds that two of our barcodes switching to another barcode, placing it with the wrong sample, is astronomically low because every barcode is at least three base pairs different. When I compared a run with a quality score threshold of thirty with a quality score threshold of 5, there was a 7.37% increase in index matches with a 0.053% increase in mismatches. Setting a quality score threshold is more important for future steps, not for demultiplexing this data set. I settled on 5, because I wanted the probability of an incorrect base call to not be over 50%.
+
+![IndexMatches](/Results/IndexMatchesGraph.png)
+
+There was 363246735 records stored in the orginal FASTQ files. 91.33% of records had matching indexes, 0.195% of records had mismatched indexes and 8.475% of records either had indexes with an average quality score below five or did not match any of the barcodes. The barcode that appeared the most was TACCGGAT (C4), with 76363857 records. These samples had both fox and mbnl proteins applied. Second was the control  sample TCTTCGAC (C10), with 42094112 records. The most common index swap was TATGGCAC (C4) to TGTTCCGT (C10) with 88571 swaps, closely followed by TGTTCCGT to TATGGCAC (C4) with 85536 swaps. The rest of the statistics for barcode matching and swaps can be found at [Barcode Statistics](/Results/statistics.txt).

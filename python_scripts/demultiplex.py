@@ -2,7 +2,6 @@
 
 import argparse, gzip
 import matplotlib.pyplot as plt
-import numpy as np
 
 def get_args():
     parser = argparse.ArgumentParser(description="A program to take library preps, and determine the number of index-pairs, index-swaps, and unknown indexes after quality filtering of index reads")
@@ -22,35 +21,35 @@ matched_indexes = 0
 index_match_ct: dict[str, int] = {}
 
 # Barcodes from data
-# barcode_dict = {
-#     "GTAGCGTA": True,
-#     "CGATCGAT": True,
-#     "GATCAAGG": True,
-#     "AACAGCGA": True,
-#     "TAGCCATG": True,
-#     "CGGTAATC": True,
-#     "CTCTGGAT": True,
-#     "TACCGGAT": True,
-#     "CTAGCTCA": True,
-#     "CACTTCAC": True,
-#     "GCTACTCT": True,
-#     "ACGATCAG": True,
-#     "TATGGCAC": True,
-#     "TGTTCCGT": True,
-#     "GTCCTAAG": True,
-#     "TCGACAAG": True,
-#     "TCTTCGAC": True,
-#     "ATCATGCG": True,
-#     "ATCGTGGT": True,
-#     "TCGAGAGT": True,
-#     "TCGGATTC": True,
-#     "GATCTTGC": True,
-#     "AGAGTCCA": True,
-#     "AGGATAGC": True
-# }
+barcode_dict = {
+    "GTAGCGTA": "B1",
+    "CGATCGAT": "A5",
+    "GATCAAGG": "C1",
+    "AACAGCGA": "B9",
+    "TAGCCATG": "C9",
+    "CGGTAATC": "C3",
+    "CTCTGGAT": "B3",
+    "TACCGGAT": "C4",
+    "CTAGCTCA": "A11",
+    "CACTTCAC": "C7",
+    "GCTACTCT": "B2",
+    "ACGATCAG": "A1",
+    "TATGGCAC": "B7",
+    "TGTTCCGT": "A3",
+    "GTCCTAAG": "B4",
+    "TCGACAAG": "A12",
+    "TCTTCGAC": "C10",
+    "ATCATGCG": "A2",
+    "ATCGTGGT": "C2",
+    "TCGAGAGT": "A10",
+    "TCGGATTC": "B8",
+    "GATCTTGC": "A7",
+    "AGAGTCCA": "B10",
+    "AGGATAGC": "A8"
+}
 
 # barcodes for test files
-barcode_dict = {"ATA": True, "GCC": True}
+# barcode_dict = {"ATA": True, "GCC": True}
 
 # store how many times an index swaps
 barcode_swap_dict: dict[str, int] = {}
@@ -125,8 +124,8 @@ barcode_file_dict["unknown"] = (open("unknown_R1.fastq", "w"), open("unknown_R2.
 barcode_file_dict["hopped"] = (open("hopped_R1.fastq", "w"), open("hopped_R2.fastq", "w"))
 
 # Parse through the input files and send the FASTQ records to the correct output file
-# with gzip.open(args.read1file, "rt") as fq1, gzip.open(args.read2file, "rt") as fq2, gzip.open(args.read3file, "rt") as fq3, gzip.open(args.read4file, "rt") as fq4:
-with open(args.read1file, "r") as fq1, open(args.read2file, "r") as fq2, open(args.read3file, "r") as fq3, open(args.read4file, "r") as fq4: # test files are not gzip'ed
+with gzip.open(args.read1file, "rt") as fq1, gzip.open(args.read2file, "rt") as fq2, gzip.open(args.read3file, "rt") as fq3, gzip.open(args.read4file, "rt") as fq4:
+# with open(args.read1file, "r") as fq1, open(args.read2file, "r") as fq2, open(args.read3file, "r") as fq3, open(args.read4file, "r") as fq4: # test files are not gzip'ed
     num_line: int = 0
     curr_fq1_record = []
     curr_fq2_record = []
@@ -215,32 +214,25 @@ with open("statistics.txt", "w") as stats:
     stats.write(f'Total Records: {num_records}\n')
     stats.write(f'Matched Indexes: {matched_indexes}, {percent_matched_rd}% of records\n')
     stats.write(f'Mismatched Indexes: {mismatched_indexes}, {percent_mismatched_rd}% of records\n')
-    stats.write(f'Unknown Indexes or Indexes Below Quality Score Threshold: {unknown_indexes}, {percent_unknown_rd}% of records\n\n')
+    stats.write(f'Unknown Indexes or Indexes Below Quality Score Threshold of {args.threshold}: {unknown_indexes}, {percent_unknown_rd}% of records\n\n')
     stats.write(f'Individual Index Matching and Swapping Statistics\n')
     for barcode, count in sorted(index_match_ct.items(), key=lambda item: item[1], reverse=True):
         match_or_swap = swap_or_match(barcode, count)
         percent_of_records: float = (count / num_records) * 100
-        percent_of_records_rd = round(percent_of_records, 3)
+        percent_of_records_rd = round(percent_of_records, 9)
         stats.write(f'{match_or_swap}, {percent_of_records_rd}% of records\n')
         
 
-# Create graphs that show the number of index swaps, and index matches respectively 
-barcode_swaps_names = list(barcode_swap_dict.keys())
-barcode_swaps_ct = list(barcode_swap_dict.values())
+# Create graphs that show the number of index matches
+barcode_matches_names: list = [] 
+barcode_matches_ct: list = []
 
-plt.barh(barcode_swaps_names, barcode_swaps_ct, color="pink", edgecolor="black")
-plt.grid(axis='x', linestyle='--', alpha=0.5)
-plt.tick_params(axis='y', labelsize=8)
-plt.title('Number of Index Swaps')
-plt.xlabel('# of Swaps')
-plt.ylabel('Index Swap')
-plt.yticks(rotation=45)
-plt.tight_layout()
-plt.savefig('IndexSwapsGraph.png')
-plt.clf()
+for barcode, count in sorted(barcode_match_dict.items(), key=lambda item: item[1], reverse=True):
+    barcode_matches_names.append(barcode)
+    barcode_matches_ct.append(count)
 
-barcode_matches_names = list(barcode_match_dict.keys())
-barcode_matches_ct = list(barcode_match_dict.values())
+height = 0.2 * len(barcode_matches_names)
+plt.figure(figsize=(10, height))
 
 plt.barh(barcode_matches_names, barcode_matches_ct, color="pink", edgecolor="black")
 plt.grid(axis='x', linestyle='--', alpha=0.5)

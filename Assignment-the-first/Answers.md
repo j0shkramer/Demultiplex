@@ -17,13 +17,13 @@
 2. Per-base NT distribution
     1. Use markdown to insert your 4 histograms here.
 
-![graph1](/plots/R1.fastq.png)
+![graph1](/qc_plots/R1.fastq.png)
 
-![graph2](/plots/R2.fastq.png)
+![graph2](/qc_plots/R2.fastq.png)
 
-![graph3](/plots/R3.fastq.png)
+![graph3](/qc_plots/R3.fastq.png)
 
-![graph4](/plots/R4.fastq.png)
+![graph4](/qc_plots/R4.fastq.png)
 
     2. We are using this mRNA-seq data to measure the relative expression of genes across different samples. To ensure accuracy, I chose an average quality score threshold of Q30 for the barcode sequences, which aligns with common industry and academic standards. A base with a quality score of 30 has only a 1 in 1,000 chance of being called incorrectly, making it a reliable cutoff. Since accurate demultiplexing is critical when comparing gene expression between treatment conditions, if you use a lower threshold, it could result in reads being misassigned to the wrong samples. This would obscure biologically meaningful differences between the samples and compromise the interpretation of treatment effects. By using an average Q30 threshold, it minimizes misassignment risk while retaining a sufficient number of high-confidence reads for future analysis.
 

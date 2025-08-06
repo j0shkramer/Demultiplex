@@ -280,3 +280,20 @@ The odds that two indexes both swapped into another known index is low because a
 Editted demultiplex.py to include graphs, one showing the amount of indexes that swapped and what they swapped to, and the one showing the amount of index matches found.
 
 Changed the output statistics.txt to round the thousands place for percentages
+
+JobID: 36760981
+
+    /usr/bin/time -v ./demultiplex.py -r1 $fastqR1 -r2 $fastqR2 -r3 $fastqR3 -r4 $fastqR4 -t 5
+
+	User time (seconds): 3606.05
+	System time (seconds): 34.27
+	Percent of CPU this job got: 94%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:04:13
+	Maximum resident set size (kbytes): 309616
+	Exit status: 0
+
+# August 5th, 2025
+
+Removed the graph for index swaps, there was over 500 index swaps so fitting it on one graph is nearly impossible without having a graph that is so massive it is worthless
+
+Wrote a SLURM script to compress all of the FASTQ files
