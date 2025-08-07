@@ -1,7 +1,7 @@
 # Final Index Matching and Mismatching Statistics Summary
 
 
-For the minimum quality score threshold, I decided to select a quality score of 5. This is because the odds that two of our barcodes switching to another barcode, placing it with the wrong sample, is astronomically low because every barcode is at least three base pairs different. When I compared a run with a quality score threshold of thirty with a quality score threshold of 5, there was a 7.37% increase in index matches with a 0.053% increase in mismatches. Setting a quality score threshold is more important for future steps, not for demultiplexing this data set. I settled on 5, because I wanted the probability of an incorrect base call to not be over 50%.
+For the minimum quality score threshold, I decided to select a quality score of 5. This is because the odds that two of our barcodes switching to another barcode, placing it with the wrong sample, is astronomically low because every barcode is at least three base pairs different. When I compared a run with a quality score threshold of thirty with a quality score threshold of 5, there was an increase from 304980270 index matches to 331755033 index matches, with an increase of mismatches from 517612 to 707740. Setting a quality score threshold is more important for future steps, not for demultiplexing this data set. I settled on 5, because I wanted the probability of an incorrect base call to not be over 50%. I will let whatever bioinformatical tools that we use for future analysis to determine whether a read should be used based on its quality score.
 
 ![IndexMatches](/Results/IndexMatchesGraph.png)
 
